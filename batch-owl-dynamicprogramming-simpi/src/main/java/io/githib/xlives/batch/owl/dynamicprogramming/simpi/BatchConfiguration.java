@@ -52,16 +52,16 @@ import java.util.Map;
 @SpringBootApplication
 public class BatchConfiguration {
 
-    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/input");
-    private static final File INPUT_PRIMITIVE_CONCEPT_IMPORTANCE = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/preference-profile/primitive-concept-importance");
-    private static final File INPUT_ROLE_IMPORTANCE = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/preference-profile/role-importance");
-    private static final File INPUT_PRIMITIVE_CONCEPTS_SIMILARITY = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/preference-profile/primitive-concepts-similarity");
-    private static final File INPUT_PRIMITIVE_ROLES_SIMILARITY = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/preference-profile/primitive-concepts-similarity");
-    private static final File INPUT_ROLE_DISCOUNT_FACTOR = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/preference-profile/role-discount-factor");
+    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/input");
+    private static final File INPUT_PRIMITIVE_CONCEPT_IMPORTANCE = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/preference-profile/primitive-concept-importance");
+    private static final File INPUT_ROLE_IMPORTANCE = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/preference-profile/role-importance");
+    private static final File INPUT_PRIMITIVE_CONCEPTS_SIMILARITY = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/preference-profile/primitive-concepts-similarity");
+    private static final File INPUT_PRIMITIVE_ROLES_SIMILARITY = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/preference-profile/primitive-concepts-similarity");
+    private static final File INPUT_ROLE_DISCOUNT_FACTOR = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/preference-profile/role-discount-factor");
 
-    private static final File OUTPUT_DYNAMICPROGRAMMING_SIMPI = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/output/output");
+    private static final File OUTPUT_DYNAMICPROGRAMMING_SIMPI = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/output/output");
 
-    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-simpi/input/family.owl";
+    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-simpi/input/family.owl";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -91,13 +91,13 @@ public class BatchConfiguration {
             public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
                 dynamicProgrammingSimPiResult = new StringBuilder();
 
-                dynamicProgrammingSimPiResult.append("Concept 1\tConcept 2\tSimilarity\tBenchmark\n");
+                dynamicProgrammingSimPiResult.append("Concept 1\tConcept 2\t\tSimilarity\tBenchmark\n");
 
                 for (int i = 0; i < concept1sToMeasure.size(); i++) { // ignore length of concept 2
                     dynamicProgrammingSimPiResult.append(concept1sToMeasure.get(i));
-                    dynamicProgrammingSimPiResult.append("\t");
+                    dynamicProgrammingSimPiResult.append("\t\t\t");
                     dynamicProgrammingSimPiResult.append(concept2sToMeasure.get(i));
-                    dynamicProgrammingSimPiResult.append("\t");
+                    dynamicProgrammingSimPiResult.append("\t\t");
                     dynamicProgrammingSimPiResult.append(owlSimilarityController.measureSimilarityWithDynamicProgrammingSimPi(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
 
                     List<String> benchmark = owlSimilarityController.getDynamicProgrammingSimPiExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");

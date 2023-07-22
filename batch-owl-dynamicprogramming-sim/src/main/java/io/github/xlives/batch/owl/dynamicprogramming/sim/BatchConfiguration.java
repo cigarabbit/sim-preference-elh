@@ -52,9 +52,9 @@ import java.util.Map;
 @SpringBootApplication
 public class BatchConfiguration {
 
-    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-sim/input/input");
-    private static final File OUTPUT_DYNAMICPROGRAMMING_SIM = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-sim/output/output");
-    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-sim/input/family.owl";
+    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-sim/input/input");
+    private static final File OUTPUT_DYNAMICPROGRAMMING_SIM = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-sim/output/output");
+    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-sim/input/family.owl";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

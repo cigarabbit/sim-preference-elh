@@ -32,50 +32,34 @@ public class Tree<T> {
     protected String toString(StringBuilder builder, int id, int depth) {
         if (depth == DEFAULT_ROOT_LEVEL) {
             builder.append("\n");
-
-            // Handle specific types of data
-            if (nodes.get(id).getData() instanceof Set) {
-                builder.append("{");
-                builder.append(nodes.get(id).toString());
-                builder.append("}");
-            }
-
-            else {
-                builder.append(nodes.get(id).getData().toString());
-            }
-
+            appendNode(nodes, builder, id);
             builder.append("\n");
         }
 
         else {
             String tabs = String.format("%0" + depth + "d", 0);
             builder.append(StringUtils.replace(tabs, "0", "\t"));
-            builder.append("<");
-            builder.append(nodes.get(id).getEdgeToParent());
-            builder.append(">");
-
-            // Handle specific types of data
-            if (nodes.get(id).getData() instanceof Set) {
-                builder.append("{");
-                builder.append(nodes.get(id).toString());
-                builder.append("}");
-            }
-
-            else {
-                builder.append(nodes.get(id).getData().toString());
-            }
-
-            builder.append("\n");
+            builder.append("<").append(nodes.get(id).getEdgeToParent()).append(">");
+            appendNode(nodes, builder, id);
+            builder.append("\n").append(tabs);
         }
 
-        List<TreeNode<T>> children = nodes.get(id).getChildren();
-        for (TreeNode<T> child : children) {
-
+        for (TreeNode<T> child : nodes.get(id).getChildren()) {
             // Recursive call
             this.toString(builder, child.getId(), depth + 1);
         }
 
         return builder.toString();
+    }
+
+
+    // handle specific types of data
+    private void appendNode(Map<Integer, TreeNode<T>> node, StringBuilder builder, int id) {
+        if (node.get(id).getData() instanceof Set) {
+            builder.append("{").append(node.get(id).toString()).append("}");
+        } else {
+            builder.append(node.get(id).getData().toString());
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
