@@ -114,7 +114,7 @@ public class DynamicProgrammingSimReasonerImpl extends TopDownSimReasonerImpl {
         }
 
         markedTime.add(DateTime.now());
-        for (int i = heightTree1 - 1; i >= 0; i--) {
+        for (int i = heightTree1 - 1; i >= 0; i--) { // lowest level to the root
             List<TreeNode<Set<String>>> list1 = breadthFirstTree1.getNodesOnEachLevel().get(i);
             List<TreeNode<Set<String>>> list2 = breadthFirstTree2.getNodesOnEachLevel().get(i);
 

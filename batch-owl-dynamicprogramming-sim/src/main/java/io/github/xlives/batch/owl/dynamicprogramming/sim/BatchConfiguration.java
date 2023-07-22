@@ -82,12 +82,13 @@ public class BatchConfiguration {
             public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
                 dynamicProgrammingSimResult = new StringBuilder();
 
+                dynamicProgrammingSimResult.append("Concept 1\tConcept 2\t\tSimilarity\tBenchmark\n");
+
                 for (int i = 0; i < concept1sToMeasure.size(); i++) {
-                    dynamicProgrammingSimResult.append(concept1sToMeasure.get(i));
-                    dynamicProgrammingSimResult.append("\t");
-                    dynamicProgrammingSimResult.append(concept2sToMeasure.get(i));
-                    dynamicProgrammingSimResult.append("\t");
+                    dynamicProgrammingSimResult.append(concept1sToMeasure.get(i)).append("\t");
+                    dynamicProgrammingSimResult.append(concept2sToMeasure.get(i)).append("\t");
                     dynamicProgrammingSimResult.append(owlSimilarityController.measureSimilarityWithDynamicProgrammingSim(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
+                    dynamicProgrammingSimResult.append("\t");
 
                     List<String> benchmark = owlSimilarityController.getDynamicProgrammingSimExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");
                     for (String result : benchmark) {

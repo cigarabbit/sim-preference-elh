@@ -94,11 +94,10 @@ public class BatchConfiguration {
                 dynamicProgrammingSimPiResult.append("Concept 1\tConcept 2\t\tSimilarity\tBenchmark\n");
 
                 for (int i = 0; i < concept1sToMeasure.size(); i++) { // ignore length of concept 2
-                    dynamicProgrammingSimPiResult.append(concept1sToMeasure.get(i));
-                    dynamicProgrammingSimPiResult.append("\t\t\t");
-                    dynamicProgrammingSimPiResult.append(concept2sToMeasure.get(i));
-                    dynamicProgrammingSimPiResult.append("\t\t");
+                    dynamicProgrammingSimPiResult.append(concept1sToMeasure.get(i)).append("\t\t\t");
+                    dynamicProgrammingSimPiResult.append(concept2sToMeasure.get(i)).append("\t\t");
                     dynamicProgrammingSimPiResult.append(owlSimilarityController.measureSimilarityWithDynamicProgrammingSimPi(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
+                    dynamicProgrammingSimPiResult.append("\t");
 
                     List<String> benchmark = owlSimilarityController.getDynamicProgrammingSimPiExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");
                     for (String result : benchmark) {
