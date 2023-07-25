@@ -47,7 +47,6 @@ import java.util.Map;
         SimilarityService.class, SuperRoleUnfolderManchesterSyntax.class,
         SuperRoleUnfolderKRSSSyntax.class, PreferenceProfile.class
 })
-
 @EnableBatchProcessing
 @SpringBootApplication
 public class BatchConfiguration {

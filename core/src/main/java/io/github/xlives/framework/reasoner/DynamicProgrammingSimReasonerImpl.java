@@ -1,6 +1,5 @@
 package io.github.xlives.framework.reasoner;
 
-import io.github.xlives.enumeration.OWLDocumentFormat;
 import io.github.xlives.enumeration.ReasonerParameters;
 import io.github.xlives.exception.ErrorCode;
 import io.github.xlives.exception.JSimPiException;
@@ -114,7 +113,7 @@ public class DynamicProgrammingSimReasonerImpl extends TopDownSimReasonerImpl {
         }
 
         markedTime.add(DateTime.now());
-        for (int i = heightTree1 - 1; i >= 0; i--) { // lowest level to the root
+        for (int i = heightTree1 - 1; i >= 0; i--) { // from the lowest level to the root
             List<TreeNode<Set<String>>> list1 = breadthFirstTree1.getNodesOnEachLevel().get(i);
             List<TreeNode<Set<String>>> list2 = breadthFirstTree2.getNodesOnEachLevel().get(i);
 

@@ -125,7 +125,7 @@ public class Application implements CommandLineRunner {
     // OPTIONS TO RUN //////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void run3(String... args) {
+    private void run3(String... args) throws IOException {
         krssServiceContext.init("/Users/Xlives/HgProjects/jSimPi/core/snomed.krss");
 
         List<String> lines = readSctDescriptionFile("/Users/Xlives/Desktop/Sampled/defined_finding_finding.txt");
@@ -288,6 +288,8 @@ public class Application implements CommandLineRunner {
 
         catch (JSimPiException e) {
             throw new JSimPiException("Unable to run", e, ErrorCode.Application_IllegalArguments);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

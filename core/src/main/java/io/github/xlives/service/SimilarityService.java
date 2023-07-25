@@ -2,22 +2,26 @@ package io.github.xlives.service;
 
 import io.github.xlives.exception.ErrorCode;
 import io.github.xlives.exception.JSimPiException;
+import io.github.xlives.framework.BackTraceTable;
 import io.github.xlives.framework.descriptiontree.Tree;
 import io.github.xlives.framework.descriptiontree.TreeBuilder;
-import io.github.xlives.framework.reasoner.*;
+import io.github.xlives.framework.reasoner.DynamicProgrammingSimPiReasonerImpl;
+import io.github.xlives.framework.reasoner.DynamicProgrammingSimReasonerImpl;
+import io.github.xlives.framework.reasoner.IReasoner;
+import io.github.xlives.framework.reasoner.TopDownSimReasonerImpl;
 import io.github.xlives.framework.unfolding.ConceptDefinitionUnfolderManchesterSyntax;
 import io.github.xlives.framework.unfolding.IConceptUnfolder;
 import io.github.xlives.framework.unfolding.IRoleUnfolder;
 import io.github.xlives.util.MyStringUtils;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class SimilarityService {
@@ -56,6 +60,9 @@ public class SimilarityService {
     private Map<String, Map<String, List<String>>> dynamicProgrammingSimExecutionMap = new HashMap<String, Map<String, List<String>>>();
     private Map<String, Map<String, List<String>>> dynamicProgrammingSimPiExecutionMap = new HashMap<String, Map<String, List<String>>>();
 
+    private ExplanationService explanationService = new ExplanationService();
+    private BackTraceTable backTraceTable = new BackTraceTable();
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Private /////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +79,7 @@ public class SimilarityService {
         }
     }
 
-    private BigDecimal computeSimilarity(IReasoner iReasoner, IRoleUnfolder iRoleUnfolder, Tree<Set<String>> tree1, Tree<Set<String>> tree2) {
+    private BigDecimal computeSimilarity(IReasoner iReasoner, IRoleUnfolder iRoleUnfolder, Tree<Set<String>> tree1, Tree<Set<String>> tree2) throws IOException {
         iReasoner.setRoleUnfoldingStrategy(iRoleUnfolder);
 
         BigDecimal forwardDistance = iReasoner.measureDirectedSimilarity(tree1, tree2);
@@ -128,7 +135,7 @@ public class SimilarityService {
     // Public //////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public BigDecimal measureOWLConcetpsWithTopDownSim(String conceptName1, String conceptName2) {
+    public BigDecimal measureOWLConcetpsWithTopDownSim(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with top down Sim as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -137,10 +144,19 @@ public class SimilarityService {
         Tree<Set<String>> tree1 = unfoldAndConstructTree(conceptDefinitionUnfolderManchesterSyntax, conceptName1);
         Tree<Set<String>> tree2 = unfoldAndConstructTree(conceptDefinitionUnfolderManchesterSyntax, conceptName2);
 
-        return computeSimilarity(topDownSimReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
+        BigDecimal result = computeSimilarity(topDownSimReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
+
+        backTraceTable.inputConceptName(conceptName1, conceptName2);
+        backTraceTable.inputTreeNodeValue(tree1.getNodes().get(0), result, 1);
+        backTraceTable.inputTreeNodeValue(tree2.getNodes().get(0), result, 2);
+
+        explanationService.explainSimilarity(backTraceTable);
+
+        return result;
     }
 
-    public BigDecimal measureOWLConceptsWithTopDownSimPi(String conceptName1, String conceptName2) {
+
+    public BigDecimal measureOWLConceptsWithTopDownSimPi(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with top down SimPi as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -152,7 +168,7 @@ public class SimilarityService {
         return computeSimilarity(topDownSimPiReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
     }
 
-    public BigDecimal measureOWLConceptsWithDynamicProgrammingSim(String conceptName1, String conceptName2) {
+    public BigDecimal measureOWLConceptsWithDynamicProgrammingSim(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with dynamic programming Sim as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -164,7 +180,7 @@ public class SimilarityService {
         return computeSimilarity(dynamicProgrammingSimReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
     }
 
-    public BigDecimal measureOWLConceptsWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) {
+    public BigDecimal measureOWLConceptsWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with dynamic programming SimPi as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -176,7 +192,7 @@ public class SimilarityService {
         return computeSimilarity(dynamicProgrammingSimPiReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
     }
 
-    public BigDecimal measureKRSSConcetpsWithTopDownSim(String conceptName1, String conceptName2) {
+    public BigDecimal measureKRSSConcetpsWithTopDownSim(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with top down Sim as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -188,7 +204,7 @@ public class SimilarityService {
         return computeSimilarity(topDownSimReasonerImpl, superRoleUnfolderKRSSSyntax, tree1, tree2);
     }
 
-    public BigDecimal measureKRSSConceptsWithTopDownSimPi(String conceptName1, String conceptName2) {
+    public BigDecimal measureKRSSConceptsWithTopDownSimPi(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with top down SimPi as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -200,7 +216,7 @@ public class SimilarityService {
         return computeSimilarity(topDownSimPiReasonerImpl, superRoleUnfolderKRSSSyntax, tree1, tree2);
     }
 
-    public BigDecimal measureKRSSConceptsWithDynamicProgrammingSim(String conceptName1, String conceptName2) {
+    public BigDecimal measureKRSSConceptsWithDynamicProgrammingSim(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with dynamic programming Sim as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
@@ -212,7 +228,7 @@ public class SimilarityService {
         return computeSimilarity(dynamicProgrammingSimReasonerImpl, superRoleUnfolderKRSSSyntax, tree1, tree2);
     }
 
-    public BigDecimal measureKRSSConceptsWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) {
+    public BigDecimal measureKRSSConceptsWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable measure with dynamic programming SimPi as conceptName1[" + conceptName1 + "] and " +
                     "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);

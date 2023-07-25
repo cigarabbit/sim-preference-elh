@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class OWLSimilarityController {
     // Public //////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public BigDecimal measureSimilarityWithTopDownSim(String conceptName1, String conceptName2) {
+    public BigDecimal measureSimilarityWithTopDownSim(String conceptName1, String conceptName2) throws IOException {
         if(conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable to measure similarity with top down Sim as conceptName1[" + conceptName1
                     + "] and conceptName2[" + conceptName2 + "] are null.",
@@ -53,7 +54,7 @@ public class OWLSimilarityController {
         return value.setScale(5, BigDecimal.ROUND_HALF_UP);
     }
 
-    public BigDecimal measureSimilarityWithTopDownSimPi(String conceptName1, String conceptName2) {
+    public BigDecimal measureSimilarityWithTopDownSimPi(String conceptName1, String conceptName2) throws IOException {
         if(conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable to measure similarity with top down SimPi as conceptName1[" + conceptName1
                     + "] and conceptName2[" + conceptName2 + "] are null.",
@@ -67,7 +68,7 @@ public class OWLSimilarityController {
         return value.setScale(5, BigDecimal.ROUND_HALF_UP);
     }
 
-    public BigDecimal measureSimilarityWithDynamicProgrammingSim(String conceptName1, String conceptName2) {
+    public BigDecimal measureSimilarityWithDynamicProgrammingSim(String conceptName1, String conceptName2) throws IOException {
         if(conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable to measure similarity with top down Sim as conceptName1[" + conceptName1
                     + "] and conceptName2[" + conceptName2 + "] are null.",
@@ -81,7 +82,7 @@ public class OWLSimilarityController {
         return value.setScale(5, BigDecimal.ROUND_HALF_UP);
     }
 
-    public BigDecimal measureSimilarityWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) {
+    public BigDecimal measureSimilarityWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) throws IOException {
         if (conceptName1 == null || conceptName2 == null) {
             throw new JSimPiException("Unable to measure similarity with top down SimPi as conceptName1[" + conceptName1
                     + "] and conceptName2[" + conceptName2 + "] are null.",

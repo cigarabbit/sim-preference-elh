@@ -19,7 +19,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @Component("topDownSimReasonerImpl")
 public class TopDownSimReasonerImpl implements IReasoner {
@@ -78,6 +81,7 @@ public class TopDownSimReasonerImpl implements IReasoner {
         return numberOfPrimitives.divide(divisor, 5, BigDecimal.ROUND_HALF_UP);
     }
 
+    // method to compute average of the best matching of primitive concepts
     protected BigDecimal phd(TreeNode<Set<String>> node1, TreeNode<Set<String>> node2) {
         if (node1 == null || node2 == null) {
             throw new JSimPiException("Unable to phd as node1[" + node1 + "] and node2[" +
@@ -100,6 +104,7 @@ public class TopDownSimReasonerImpl implements IReasoner {
         }
     }
 
+    // method to compute degree of potential homomorphism on a matching edge
     protected BigDecimal eSetHd(TreeNode<Set<String>> node1, TreeNode<Set<String>> node2) {
         if (node1 == null || node2 == null) {
             throw new JSimPiException("Unable to e-set-hd as node1[" + node1 + "] and node2[" +
@@ -186,6 +191,7 @@ public class TopDownSimReasonerImpl implements IReasoner {
         return nuPrime.multiply(simSubTree).add(nu).multiply(gammaValue);
     }
 
+    // involve with 'roles'
     protected BigDecimal gamma(String edge1, String edge2) {
         if (edge1 == null || edge2 == null) {
             throw new JSimPiException("Unable to gamma as edge1[" +
