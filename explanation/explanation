@@ -1,19 +1,12 @@
-The similarity between Female and Cousin is 0.00000 because they have [nothing] in common.
-	Female = [Female Sex Thing], ** DO NOT HAVE ANY ROLES **
-	Cousin = [Person], isParentOf
-The similarity between Female and ParentInLaw is 0.00000 because they have [nothing] in common.
-	Female = [Female Sex Thing], ** DO NOT HAVE ANY ROLES **
-	ParentInLaw = [Person], isSpouseOf
-The similarity between Female and Man is 0.58334 because they have [Sex, Thing] in common.
-	Female = [Female Sex Thing], ** DO NOT HAVE ANY ROLES **
-	Man = [Male Sex Person Thing], ** DO NOT HAVE ANY ROLES **
-The similarity between Son and SonInLaw is 0.97000 because they have [Sex, Male, Person, Thing] in common.
+The similarity between Mother and Son is 0.60000 because they have [Sex, Person, Thing] in common.
+	Mother = [Female Sex Person Thing], isMotherOf
 	Son = [Male Sex Person Thing], hasParent
-	SonInLaw = [Male Sex Person Thing], isSpouseOf
-The similarity between Son and Female is 0.53334 because they have [Sex, Thing] in common.
+The similarity between Daughter and Parent is 0.35000 because they have [Person] in common.
+	Daughter = [Female Sex Person Thing], hasParent
+	Parent = [Person], isParentOf
+The similarity between Son and Father is 0.80000 because they have [Sex, Male, Person, Thing] in common.
 	Son = [Male Sex Person Thing], hasParent
-	Female = [Female Sex Thing], ** DO NOT HAVE ANY ROLES **
-The similarity between Descendant and UncleInLaw is 0.35000 because they have [Person] in common.
-	Descendant = [Person], hasAncestor
-	UncleInLaw = [Male Sex Person Thing], isParentOf
-
+	Father = [Male Sex Person Thing], isFatherOf
+The similarity between Son and Daughter is 0.80000 because they have [Sex, Person, Thing] in common.
+	Son = [Male Sex Person Thing], hasParent
+	Daughter = [Female Sex Person Thing], hasParent

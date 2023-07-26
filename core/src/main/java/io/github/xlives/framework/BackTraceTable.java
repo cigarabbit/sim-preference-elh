@@ -2,7 +2,6 @@ package io.github.xlives.framework;
 
 import io.github.xlives.framework.descriptiontree.Tree;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -14,12 +13,10 @@ public class BackTraceTable {
 
     private Map<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>> backTraceTable = new LinkedHashMap<>();
 
-    public StringBuilder test = new StringBuilder();
-
     private String[] cnPair = new String[2];
 
     // method to input values for the innermost list of tree nodes
-    public void inputTreeNodeValue(Tree<Set<String>> node, BigDecimal values, int order) throws IOException {
+    public void inputTreeNodeValue(Tree<Set<String>> node, BigDecimal values, int order) {
 
         Map<Tree<Set<String>>, BigDecimal> treeNodeMap = new HashMap<>();
         Map<String, Map<Tree<Set<String>>, BigDecimal>> innerMap = new HashMap<>();

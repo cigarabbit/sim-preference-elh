@@ -51,10 +51,10 @@ public class BatchConfiguration {
 
     private static final String HEADER_RESULT = "concept" + "\t" + "concept" + "\t" + "similarity" + "\t" + "millisecond" + "\t" + "millisecond" + "\t" + "millisecond";
 
-    private static final File INPUT_CONCEPTS = new File("./input/input");
-    private static final File OUTPUT_DYNAMICPROGRAMMING_SIM = new File("./output/output");
+    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim/input/input");
+    private static final File OUTPUT_DYNAMICPROGRAMMING_SIM = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim/output/output");
 
-    private static final String PATH_KRSS_ONTOLOGY = "./input/snomed.krss";
+    private static final String PATH_KRSS_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim/input/snomed.krss";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

@@ -1,4 +1,4 @@
-package io.github.xlives.batch.owl.dynamicprogramming.sim;
+package io.github.xlives.service;
 
 import org.apache.commons.io.FileUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -12,8 +12,8 @@ import java.io.IOException;
 // pair a class with ontology
 public class OWLClassExtractor {
     public static void main(String[] args) throws IOException {
-        String owlFilePath = "/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-sim/input/family.owl";
-        File OutputFile = new File("/Users/rchn/Desktop/similarity_preference_elh-main/batch-owl-dynamicprogramming-sim/output/outputpair");
+        String owlFilePath = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl";
+        File OutputFile = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/output/outputpair");
 
         StringBuilder ResultOutput;
         ResultOutput = new StringBuilder();
@@ -35,7 +35,7 @@ public class OWLClassExtractor {
                 String className2 = shortFormProvider.getShortForm(owlClass2);
 
                 if (className1.equals(className2)) {
-                    continue; // Skip pairing a class with itself
+                    continue; // skip pairing a class with itself
                 }
 
                 ResultOutput.append(className1 + " " + className2);

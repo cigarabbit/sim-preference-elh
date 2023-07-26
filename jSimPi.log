@@ -14966,3 +14966,395 @@ io.github.xlives.exception.JSimPiException: Unable to measure similarity with OW
 2023-07-26 23:49:46.119  INFO 33835 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:49:45 JST 2023]; root of context hierarchy
 2023-07-26 23:49:46.120  INFO 33835 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
 2023-07-26 23:49:46.121  INFO 33835 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-26 23:53:52.372  INFO 34036 --- [main] i.g.x.b.o.d.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 34036 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-dynamicprogramming-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-26 23:53:52.373  INFO 34036 --- [main] i.g.x.b.o.d.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-26 23:53:52.389  INFO 34036 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:53:52 JST 2023]; root of context hierarchy
+2023-07-26 23:53:52.587  WARN 34036 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-26 23:53:52.590  WARN 34036 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-26 23:53:52.625  INFO 34036 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-26 23:53:52.770  INFO 34036 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-26 23:53:52.774  INFO 34036 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-26 23:53:52.798  INFO 34036 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-26 23:53:52.803  INFO 34036 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-26 23:53:52.805  INFO 34036 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-26 23:53:52.853  INFO 34036 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-26 23:53:52.865  INFO 34036 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-26 23:53:52.870  INFO 34036 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-26 23:53:52.876 ERROR 34036 --- [main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step stepReadInputConcepts in job job
+
+java.io.FileNotFoundException: File './input' does not exist
+	at org.apache.commons.io.FileUtils.openInputStream(FileUtils.java:299)
+	at org.apache.commons.io.FileUtils.readFileToString(FileUtils.java:1711)
+	at org.apache.commons.io.FileUtils.readFileToString(FileUtils.java:1748)
+	at io.github.xlives.batch.owl.dynamicprogramming.sim.BatchConfiguration$2.execute(BatchConfiguration.java:113)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:406)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:330)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:271)
+	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:81)
+	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:374)
+	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:215)
+	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:144)
+	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:257)
+	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:200)
+	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:148)
+	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:392)
+	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:135)
+	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:306)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher$1.run(SimpleJobLauncher.java:135)
+	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher.run(SimpleJobLauncher.java:128)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.batch.core.configuration.annotation.SimpleBatchConfiguration$PassthruAdvice.invoke(SimpleBatchConfiguration.java:127)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)
+	at com.sun.proxy.$Proxy40.run(Unknown Source)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.execute(JobLauncherCommandLineRunner.java:216)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.executeLocalJobs(JobLauncherCommandLineRunner.java:233)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.launchJobFromProperties(JobLauncherCommandLineRunner.java:125)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.run(JobLauncherCommandLineRunner.java:119)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at io.github.xlives.batch.owl.dynamicprogramming.sim.BatchConfiguration.main(BatchConfiguration.java:199)
+
+2023-07-26 23:53:52.879  INFO 34036 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [FAILED]
+2023-07-26 23:53:52.880  INFO 34036 --- [main] i.g.x.b.o.d.sim.BatchConfiguration       : Started BatchConfiguration in 0.64 seconds (JVM running for 0.877)
+2023-07-26 23:53:52.880  INFO 34036 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:53:52 JST 2023]; root of context hierarchy
+2023-07-26 23:53:52.881  INFO 34036 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-26 23:53:52.882  INFO 34036 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-26 23:54:14.122  INFO 34062 --- [main] i.g.x.b.o.t.simpi.BatchConfiguration     : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 34062 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-26 23:54:14.123  INFO 34062 --- [main] i.g.x.b.o.t.simpi.BatchConfiguration     : No active profile set, falling back to default profiles: default
+2023-07-26 23:54:14.142  INFO 34062 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:54:14 JST 2023]; root of context hierarchy
+2023-07-26 23:54:14.336  WARN 34062 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-26 23:54:14.339  WARN 34062 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-26 23:54:14.374  INFO 34062 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-26 23:54:14.518  INFO 34062 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-26 23:54:14.522  INFO 34062 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 3 ms.
+2023-07-26 23:54:14.548  INFO 34062 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-26 23:54:14.553  INFO 34062 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-26 23:54:14.554  INFO 34062 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-26 23:54:14.598  INFO 34062 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-26 23:54:14.611  INFO 34062 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-26 23:54:14.617  INFO 34062 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-26 23:54:14.628  INFO 34062 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-26 23:54:14.643  INFO 34062 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/family.owl...
+2023-07-26 23:54:14.699  INFO 34062 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/family.owl
+2023-07-26 23:54:14.705  INFO 34062 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputPreferenceProfile]
+2023-07-26 23:54:14.714  INFO 34062 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSimPi]
+2023-07-26 23:54:14.736  INFO 34062 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepWriteTopDownSimPiToFile]
+2023-07-26 23:54:14.740  INFO 34062 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+2023-07-26 23:54:14.741  INFO 34062 --- [main] i.g.x.b.o.t.simpi.BatchConfiguration     : Started BatchConfiguration in 0.741 seconds (JVM running for 0.986)
+2023-07-26 23:54:14.741  INFO 34062 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:54:14 JST 2023]; root of context hierarchy
+2023-07-26 23:54:14.742  INFO 34062 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-26 23:54:14.743  INFO 34062 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-26 23:55:57.552  INFO 34112 --- [main] i.g.x.b.k.d.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 34112 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-26 23:55:57.554  INFO 34112 --- [main] i.g.x.b.k.d.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-26 23:55:57.571  INFO 34112 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:55:57 JST 2023]; root of context hierarchy
+2023-07-26 23:55:57.770  WARN 34112 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-26 23:55:57.773  WARN 34112 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-26 23:55:57.809  INFO 34112 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-26 23:55:57.953  INFO 34112 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-26 23:55:57.957  INFO 34112 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-26 23:55:57.981  INFO 34112 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-26 23:55:57.985  INFO 34112 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-26 23:55:57.987  INFO 34112 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-26 23:55:58.030  INFO 34112 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-26 23:55:58.042  INFO 34112 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-26 23:55:58.047  INFO 34112 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-26 23:55:58.060  INFO 34112 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputKRSSOntology]
+2023-07-26 23:55:58.062  INFO 34112 --- [main] i.g.xlives.framework.KRSSServiceContext  : Loading KRSS file from path[/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim//input/snomed.krss].
+2023-07-26 23:56:02.685  INFO 34112 --- [main] i.g.xlives.framework.KRSSServiceContext  : KRSS file from path[/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim//input/snomed.krss] has been loaded.
+2023-07-26 23:56:02.690  INFO 34112 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeDynamicProgrammingSim]
+2023-07-27 00:03:28.729  INFO 34112 --- [Thread-1] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Wed Jul 26 23:55:57 JST 2023]; root of context hierarchy
+2023-07-27 00:03:28.733  INFO 34112 --- [Thread-1] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 00:03:28.734  INFO 34112 --- [Thread-1] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-27 00:33:02.677  INFO 35395 --- [main] i.g.x.b.o.t.simpi.BatchConfiguration     : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 35395 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-27 00:33:02.678  INFO 35395 --- [main] i.g.x.b.o.t.simpi.BatchConfiguration     : No active profile set, falling back to default profiles: default
+2023-07-27 00:33:02.702  INFO 35395 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 00:33:02 JST 2023]; root of context hierarchy
+2023-07-27 00:33:02.930  WARN 35395 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 00:33:02.933  WARN 35395 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 00:33:02.975  INFO 35395 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-27 00:33:03.149  INFO 35395 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-27 00:33:03.153  INFO 35395 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-27 00:33:03.182  INFO 35395 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-27 00:33:03.187  INFO 35395 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-27 00:33:03.188  INFO 35395 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-27 00:33:03.238  INFO 35395 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-27 00:33:03.252  INFO 35395 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-27 00:33:03.257  INFO 35395 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-27 00:33:03.270  INFO 35395 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-27 00:33:03.286  INFO 35395 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/family.owl...
+2023-07-27 00:33:03.346  INFO 35395 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/family.owl
+2023-07-27 00:33:03.353  INFO 35395 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputPreferenceProfile]
+2023-07-27 00:33:03.362  INFO 35395 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSimPi]
+2023-07-27 00:33:03.386  INFO 35395 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepWriteTopDownSimPiToFile]
+2023-07-27 00:33:03.390  INFO 35395 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+2023-07-27 00:33:03.391  INFO 35395 --- [main] i.g.x.b.o.t.simpi.BatchConfiguration     : Started BatchConfiguration in 0.895 seconds (JVM running for 1.346)
+2023-07-27 00:33:03.392  INFO 35395 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 00:33:02 JST 2023]; root of context hierarchy
+2023-07-27 00:33:03.393  INFO 35395 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 00:33:03.393  INFO 35395 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-27 01:15:02.796  INFO 35967 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 35967 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-27 01:15:02.800  INFO 35967 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-27 01:15:02.839  INFO 35967 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:15:02 JST 2023]; root of context hierarchy
+2023-07-27 01:15:03.127  WARN 35967 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:15:03.131  WARN 35967 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:15:03.172  INFO 35967 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-27 01:15:03.328  INFO 35967 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-27 01:15:03.332  INFO 35967 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-27 01:15:03.364  INFO 35967 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-27 01:15:03.369  INFO 35967 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-27 01:15:03.371  INFO 35967 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-27 01:15:03.429  INFO 35967 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-27 01:15:03.444  INFO 35967 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-27 01:15:03.450  INFO 35967 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-27 01:15:03.462  INFO 35967 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-27 01:15:03.480  INFO 35967 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/family.owl...
+2023-07-27 01:15:03.544  INFO 35967 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/family.owl
+2023-07-27 01:15:03.551  INFO 35967 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSim]
+2023-07-27 01:15:03.588  INFO 35967 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepWriteTopDownSimToFile]
+2023-07-27 01:15:03.593  INFO 35967 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+2023-07-27 01:15:03.594  INFO 35967 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Started BatchConfiguration in 1.056 seconds (JVM running for 1.343)
+2023-07-27 01:15:03.594  INFO 35967 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:15:02 JST 2023]; root of context hierarchy
+2023-07-27 01:15:03.595  INFO 35967 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 01:15:03.596  INFO 35967 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-27 01:20:28.098  INFO 36093 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 36093 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-27 01:20:28.099  INFO 36093 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-27 01:20:28.116  INFO 36093 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:20:28 JST 2023]; root of context hierarchy
+2023-07-27 01:20:28.313  WARN 36093 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:20:28.316  WARN 36093 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:20:28.351  INFO 36093 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-27 01:20:28.497  INFO 36093 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-27 01:20:28.501  INFO 36093 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-27 01:20:28.526  INFO 36093 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-27 01:20:28.531  INFO 36093 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-27 01:20:28.533  INFO 36093 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-27 01:20:28.587  INFO 36093 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-27 01:20:28.599  INFO 36093 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-27 01:20:28.604  INFO 36093 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-27 01:20:28.615  INFO 36093 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-27 01:20:28.626  INFO 36093 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl...
+2023-07-27 01:20:28.652  INFO 36093 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl
+2023-07-27 01:20:28.658  INFO 36093 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSim]
+2023-07-27 01:20:28.661 ERROR 36093 --- [main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step stepComputeTopDownSim in job job
+
+io.github.xlives.exception.JSimPiException: Unable to measure similarity with OWL sim as conceptName1[PATIENT_RECORDS] and conceptName2[DOCTORS] are invalid names.
+	at io.github.xlives.controller.OWLSimilarityController.validateInputs(OWLSimilarityController.java:35)
+	at io.github.xlives.controller.OWLSimilarityController.measureSimilarity(OWLSimilarityController.java:51)
+	at io.githib.xlives.batch.owl.topdown.sim.BatchConfiguration$1.execute(BatchConfiguration.java:92)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:406)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:330)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:271)
+	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:81)
+	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:374)
+	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:215)
+	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:144)
+	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:257)
+	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:200)
+	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:148)
+	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:392)
+	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:135)
+	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:306)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher$1.run(SimpleJobLauncher.java:135)
+	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher.run(SimpleJobLauncher.java:128)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.batch.core.configuration.annotation.SimpleBatchConfiguration$PassthruAdvice.invoke(SimpleBatchConfiguration.java:127)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)
+	at com.sun.proxy.$Proxy40.run(Unknown Source)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.execute(JobLauncherCommandLineRunner.java:216)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.executeLocalJobs(JobLauncherCommandLineRunner.java:233)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.launchJobFromProperties(JobLauncherCommandLineRunner.java:125)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.run(JobLauncherCommandLineRunner.java:119)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at io.githib.xlives.batch.owl.topdown.sim.BatchConfiguration.main(BatchConfiguration.java:200)
+
+2023-07-27 01:20:28.664  INFO 36093 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [FAILED]
+2023-07-27 01:20:28.665  INFO 36093 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Started BatchConfiguration in 0.696 seconds (JVM running for 0.948)
+2023-07-27 01:20:28.665  INFO 36093 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:20:28 JST 2023]; root of context hierarchy
+2023-07-27 01:20:28.666  INFO 36093 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 01:20:28.667  INFO 36093 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-27 01:21:15.857  INFO 36107 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 36107 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-27 01:21:15.859  INFO 36107 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-27 01:21:15.878  INFO 36107 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:21:15 JST 2023]; root of context hierarchy
+2023-07-27 01:21:16.077  WARN 36107 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:21:16.080  WARN 36107 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:21:16.115  INFO 36107 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-27 01:21:16.258  INFO 36107 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-27 01:21:16.262  INFO 36107 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-27 01:21:16.285  INFO 36107 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-27 01:21:16.289  INFO 36107 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-27 01:21:16.291  INFO 36107 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-27 01:21:16.334  INFO 36107 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-27 01:21:16.346  INFO 36107 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-27 01:21:16.351  INFO 36107 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-27 01:21:16.363  INFO 36107 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-27 01:21:16.375  INFO 36107 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl...
+2023-07-27 01:21:16.401  INFO 36107 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl
+2023-07-27 01:21:16.408  INFO 36107 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSim]
+2023-07-27 01:21:16.411 ERROR 36107 --- [main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step stepComputeTopDownSim in job job
+
+io.github.xlives.exception.JSimPiException: Unable to measure similarity with OWL sim as conceptName1[PATIENT_RECORDS] and conceptName2[DOCTORS] are invalid names.
+	at io.github.xlives.controller.OWLSimilarityController.validateInputs(OWLSimilarityController.java:35)
+	at io.github.xlives.controller.OWLSimilarityController.measureSimilarity(OWLSimilarityController.java:51)
+	at io.githib.xlives.batch.owl.topdown.sim.BatchConfiguration$1.execute(BatchConfiguration.java:92)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:406)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:330)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:271)
+	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:81)
+	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:374)
+	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:215)
+	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:144)
+	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:257)
+	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:200)
+	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:148)
+	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:392)
+	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:135)
+	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:306)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher$1.run(SimpleJobLauncher.java:135)
+	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher.run(SimpleJobLauncher.java:128)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.batch.core.configuration.annotation.SimpleBatchConfiguration$PassthruAdvice.invoke(SimpleBatchConfiguration.java:127)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)
+	at com.sun.proxy.$Proxy40.run(Unknown Source)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.execute(JobLauncherCommandLineRunner.java:216)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.executeLocalJobs(JobLauncherCommandLineRunner.java:233)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.launchJobFromProperties(JobLauncherCommandLineRunner.java:125)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.run(JobLauncherCommandLineRunner.java:119)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at io.githib.xlives.batch.owl.topdown.sim.BatchConfiguration.main(BatchConfiguration.java:200)
+
+2023-07-27 01:21:16.414  INFO 36107 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [FAILED]
+2023-07-27 01:21:16.415  INFO 36107 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Started BatchConfiguration in 0.682 seconds (JVM running for 0.933)
+2023-07-27 01:21:16.416  INFO 36107 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:21:15 JST 2023]; root of context hierarchy
+2023-07-27 01:21:16.417  INFO 36107 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 01:21:16.417  INFO 36107 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-27 01:22:42.886  INFO 36123 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 36123 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-27 01:22:42.887  INFO 36123 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-27 01:22:42.910  INFO 36123 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:22:42 JST 2023]; root of context hierarchy
+2023-07-27 01:22:43.122  WARN 36123 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:22:43.125  WARN 36123 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:22:43.160  INFO 36123 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-27 01:22:43.314  INFO 36123 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-27 01:22:43.318  INFO 36123 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 4 ms.
+2023-07-27 01:22:43.347  INFO 36123 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-27 01:22:43.352  INFO 36123 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-27 01:22:43.355  INFO 36123 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-27 01:22:43.412  INFO 36123 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-27 01:22:43.424  INFO 36123 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-27 01:22:43.429  INFO 36123 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-27 01:22:43.441  INFO 36123 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-27 01:22:43.452  INFO 36123 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl...
+2023-07-27 01:22:43.478  INFO 36123 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl
+2023-07-27 01:22:43.484  INFO 36123 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSim]
+2023-07-27 01:22:43.488 ERROR 36123 --- [main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step stepComputeTopDownSim in job job
+
+io.github.xlives.exception.JSimPiException: Unable to measure similarity with OWL sim as conceptName1[Mother] and conceptName2[Son] are invalid names.
+	at io.github.xlives.controller.OWLSimilarityController.validateInputs(OWLSimilarityController.java:35)
+	at io.github.xlives.controller.OWLSimilarityController.measureSimilarity(OWLSimilarityController.java:51)
+	at io.githib.xlives.batch.owl.topdown.sim.BatchConfiguration$1.execute(BatchConfiguration.java:92)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:406)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:330)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)
+	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:271)
+	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:81)
+	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:374)
+	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:215)
+	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:144)
+	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:257)
+	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:200)
+	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:148)
+	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:392)
+	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:135)
+	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:306)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher$1.run(SimpleJobLauncher.java:135)
+	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50)
+	at org.springframework.batch.core.launch.support.SimpleJobLauncher.run(SimpleJobLauncher.java:128)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.batch.core.configuration.annotation.SimpleBatchConfiguration$PassthruAdvice.invoke(SimpleBatchConfiguration.java:127)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)
+	at com.sun.proxy.$Proxy40.run(Unknown Source)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.execute(JobLauncherCommandLineRunner.java:216)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.executeLocalJobs(JobLauncherCommandLineRunner.java:233)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.launchJobFromProperties(JobLauncherCommandLineRunner.java:125)
+	at org.springframework.boot.autoconfigure.batch.JobLauncherCommandLineRunner.run(JobLauncherCommandLineRunner.java:119)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180)
+	at io.githib.xlives.batch.owl.topdown.sim.BatchConfiguration.main(BatchConfiguration.java:200)
+
+2023-07-27 01:22:43.490  INFO 36123 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [FAILED]
+2023-07-27 01:22:43.491  INFO 36123 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Started BatchConfiguration in 0.748 seconds (JVM running for 0.981)
+2023-07-27 01:22:43.492  INFO 36123 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:22:42 JST 2023]; root of context hierarchy
+2023-07-27 01:22:43.493  INFO 36123 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 01:22:43.493  INFO 36123 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
+2023-07-27 01:22:51.430  INFO 36131 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Starting BatchConfiguration on d175-151.jaist.ac.jp with PID 36131 (/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/target/classes started by rchn in /Users/rchn/Desktop/refactor/sim-preference-elh)
+2023-07-27 01:22:51.432  INFO 36131 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : No active profile set, falling back to default profiles: default
+2023-07-27 01:22:51.448  INFO 36131 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:22:51 JST 2023]; root of context hierarchy
+2023-07-27 01:22:51.671  WARN 36131 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.stepScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:22:51.674  WARN 36131 --- [main] o.s.c.a.ConfigurationClassEnhancer       : @Bean method ScopeConfiguration.jobScope is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-07-27 01:22:51.711  INFO 36131 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:hsqldb:mem:testdb', username='sa'
+2023-07-27 01:22:51.850  INFO 36131 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executing SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql]
+2023-07-27 01:22:51.853  INFO 36131 --- [main] o.s.jdbc.datasource.init.ScriptUtils     : Executed SQL script from class path resource [org/springframework/batch/core/schema-hsqldb.sql] in 3 ms.
+2023-07-27 01:22:51.877  INFO 36131 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2023-07-27 01:22:51.881  INFO 36131 --- [main] o.s.b.a.b.JobLauncherCommandLineRunner   : Running default command line with: []
+2023-07-27 01:22:51.883  INFO 36131 --- [main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: HSQL
+2023-07-27 01:22:51.921  INFO 36131 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : No TaskExecutor has been set, defaulting to synchronous executor.
+2023-07-27 01:22:51.933  INFO 36131 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] launched with the following parameters: [{}]
+2023-07-27 01:22:51.938  INFO 36131 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputConcepts]
+2023-07-27 01:22:51.948  INFO 36131 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepReadInputOWLOntology]
+2023-07-27 01:22:51.962  INFO 36131 --- [main] i.g.xlives.framework.OWLServiceContext   : Start loading /Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/family.owl...
+2023-07-27 01:22:52.019  INFO 36131 --- [main] i.g.xlives.framework.OWLServiceContext   : Loaded ontology:/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/family.owl
+2023-07-27 01:22:52.025  INFO 36131 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepComputeTopDownSim]
+2023-07-27 01:22:52.057  INFO 36131 --- [main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [stepWriteTopDownSimToFile]
+2023-07-27 01:22:52.061  INFO 36131 --- [main] o.s.b.c.l.support.SimpleJobLauncher      : Job: [SimpleJob: [name=job]] completed with the following parameters: [{}] and the following status: [COMPLETED]
+2023-07-27 01:22:52.062  INFO 36131 --- [main] i.g.x.b.o.t.sim.BatchConfiguration       : Started BatchConfiguration in 0.746 seconds (JVM running for 0.953)
+2023-07-27 01:22:52.062  INFO 36131 --- [main] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@5e4c8041: startup date [Thu Jul 27 01:22:51 JST 2023]; root of context hierarchy
+2023-07-27 01:22:52.063  INFO 36131 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2023-07-27 01:22:52.064  INFO 36131 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Shutting down embedded database: url='jdbc:hsqldb:mem:testdb'
