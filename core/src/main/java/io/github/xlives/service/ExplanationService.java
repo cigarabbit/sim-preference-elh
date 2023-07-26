@@ -15,48 +15,93 @@ public class ExplanationService {
 
     private List<String> conceptName = new ArrayList<>();
 
-    private StringBuilder explanation = new StringBuilder();
+    private StringBuilder result_exp = new StringBuilder();
+    private StringBuilder explanation;
+    private StringBuilder header;
 
     private File output_file = new File("/Users/rchn/Desktop/simservice");
 
     public void explainSimilarity(BackTraceTable backTraceTable) throws IOException {
+        BigDecimal degree = null;
 
-        BigDecimal degree;
+        Set<String> exiSet = new HashSet<>();
+        Set<String> priSet = new HashSet<>();
 
-        Set<String> cnPair;
-        String conceptName1;
-        String conceptName2;
+        List<Set<String>> priList = new ArrayList<>();
 
-        Set<String> roles1 = new HashSet<>();
-        Set<String> roles2 = new HashSet<>();
+        String concept1 = "";
+        String concept2 = "";
+        String curConcept = "";
+        String exi = "";
+
+        boolean headerAdded = false;
 
         List<String> matchedCon = new ArrayList<>();
 
-        // iterate through each value in backTraceTable
-        for (Map.Entry<Set<String>, List<Map<String, Map<TreeNode<Set<String>>, BigDecimal>>>> val : backTraceTable.getBackTraceTable().entrySet()) {
-            cnPair = val.getKey();
+        if (output_file.exists()) {
+            output_file.delete();
+        }
 
-            for (Map<String, Map<TreeNode<Set<String>>, BigDecimal>> node : val.getValue()){
-                explanation.append(node).append("\n");
-                for (Map.Entry<String, Map<TreeNode<Set<String>>, BigDecimal>> nodeChildren : node.entrySet()){
-                    String[] wordsArray1 = nodeChildren.getValue().keySet().toString().split("\\s+");
-                    removeUnwantedChar(wordsArray1);
-                    explanation.append(Arrays.toString(wordsArray1));
-                    explanation.append("The similarity between ").append(cnPair).append(" is ");
-                    explanation.append(nodeChildren.getValue().values()); // homomorphism degree
-                    explanation.append("because\n");
+        // iterate through each value in backTraceTable
+        for (Map.Entry<Map<Integer, String[]>, List<Map<String, Map<TreeNode<Set<String>>, BigDecimal>>>> val : backTraceTable.getBackTraceTable().entrySet()) {
+            explanation = new StringBuilder();
+            header = new StringBuilder();
+
+            priSet.clear();
+            exiSet.clear();
+
+            Map<Integer, String[]> keyMap = val.getKey();
+
+            for (int i = 0; i < keyMap.size(); i++) {
+                String[] arrayValue = keyMap.get(i);
+                if (arrayValue != null) {
+                    for (int j = 0; j < arrayValue.length; j++) {
+                        if (j == 0) { concept1 = arrayValue[0]; curConcept = concept1;}
+                        else { concept2 = arrayValue[1]; }
+                    }
                 }
             }
 
+            for (Map<String, Map<TreeNode<Set<String>>, BigDecimal>> node : val.getValue()) {
+                for (Map.Entry<String, Map<TreeNode<Set<String>>, BigDecimal>> nodeChildren : node.entrySet()) {
+                    explanation.append(nodeChildren.getKey());
+                    Map<TreeNode<Set<String>>, BigDecimal> innerMap = nodeChildren.getValue();
+                    for (Map.Entry<TreeNode<Set<String>>, BigDecimal> child : innerMap.entrySet()) {
+
+                        // Get the homomorphism degree for each node
+                        degree = child.getValue();
+                        priSet.add(child.getKey().getData().toString());
+
+                        // explanation.append(pri);
+                        // existential
+
+                    }
+                }
+            }
+
+            priList.add(priSet);
+
+            // explanation.append("The similarity between ").append(concept1).append(" and ").append(concept2).append(" is ");
+
+            // explanation.append(degree).append("\n"); // homomorphism degree
+            explanation.append("\t").append(priSet).append("\n");
+
+            /*
+            explanation.append("\t").append(cnPair).append(" = ").append(priSet).append("\n");
+            explanation.append("\t\t").append(exiSet).append("\n"); */
+
+           result_exp.append(explanation);
         }
 
-        FileUtils.writeStringToFile(output_file, explanation.toString(), false);
+        FileUtils.writeStringToFile(output_file, result_exp.toString(), true);
     }
 
-    private static void removeUnwantedChar(String[] wordsArray) {
-        for (int i = 0; i < wordsArray.length; i++) {
-            wordsArray[i] = wordsArray[i].replaceAll("'", "");
-        }
+    private void writeToFile() throws IOException {
+        result_exp.append(header);
+
+    }
+    private String removeUnwantedChar(String word) {
+        return word.replace("'", "");
     }
 
     private List<String> matchConcepts() {
@@ -64,9 +109,7 @@ public class ExplanationService {
 
         return  matchedCon;
     }
-    public StringBuilder getExplanation() {
-        return explanation;
-    }
+
 
     public void setConceptName(String conceptName) {
         this.conceptName.add(conceptName);

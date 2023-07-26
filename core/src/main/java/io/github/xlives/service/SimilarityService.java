@@ -135,6 +135,7 @@ public class SimilarityService {
 
         BigDecimal result = computeSimilarity(topDownSimReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
 
+        // extract explanation
         backTraceTable.inputConceptName(conceptName1, conceptName2);
         backTraceTable.inputTreeNodeValue(tree1, result, 1);
         backTraceTable.inputTreeNodeValue(tree2, result, 2);
