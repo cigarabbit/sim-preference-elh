@@ -95,40 +95,29 @@ public class SimilarityService {
 
     private void reckonTime(IReasoner iReasoner, Tree<Set<String>> tree1, Tree<Set<String>> tree2) {
         if (iReasoner instanceof DynamicProgrammingSimReasonerImpl) {
-            Map<String, List<String>> tmp = dynamicProgrammingSimExecutionMap.get(tree1.getLabel());
-            if (tmp == null) {
-                tmp = new HashMap<String, List<String>>();
-            }
-            tmp.put(tree2.getLabel(), dynamicProgrammingSimReasonerImpl.getExecutionTimes());
-            dynamicProgrammingSimExecutionMap.put(tree1.getLabel(), tmp);
+            updateMap(tree1, tree2, dynamicProgrammingSimExecutionMap, dynamicProgrammingSimReasonerImpl);
         }
 
         else if (iReasoner instanceof TopDownSimReasonerImpl) {
-            Map<String, List<String>> tmp = topDownSimExecutionMap.get(tree1.getLabel());
-            if (tmp == null) {
-                tmp = new HashMap<String, List<String>>();
-            }
-            tmp.put(tree2.getLabel(), topDownSimReasonerImpl.getExecutionTimes());
-            topDownSimExecutionMap.put(tree1.getLabel(), tmp);
+            updateMap(tree1, tree2, topDownSimExecutionMap, topDownSimReasonerImpl);
         }
 
         else if (iReasoner instanceof DynamicProgrammingSimPiReasonerImpl){
-            Map<String, List<String>> tmp = dynamicProgrammingSimPiExecutionMap.get(tree1.getLabel());
-            if (tmp == null) {
-                tmp = new HashMap<String, List<String>>();
-            }
-            tmp.put(tree2.getLabel(), dynamicProgrammingSimPiReasonerImpl.getExecutionTimes());
-            dynamicProgrammingSimPiExecutionMap.put(tree1.getLabel(), tmp);
+            updateMap(tree1, tree2, dynamicProgrammingSimPiExecutionMap, dynamicProgrammingSimPiReasonerImpl);
         }
 
         else {
-            Map<String, List<String>> tmp = topDownSimPiExecutionMap.get(tree1.getLabel());
-            if (tmp == null) {
-                tmp = new HashMap<String, List<String>>();
-            }
-            tmp.put(tree2.getLabel(), topDownSimPiReasonerImpl.getExecutionTimes());
-            topDownSimPiExecutionMap.put(tree1.getLabel(), tmp);
+            updateMap(tree1, tree2, topDownSimPiExecutionMap, topDownSimPiReasonerImpl);
         }
+    }
+
+    private void updateMap(Tree<Set<String>> tree1, Tree<Set<String>> tree2, Map<String, Map<String, List<String>>> dynamicProgrammingSimExecutionMap, IReasoner dynamicProgrammingSimReasonerImpl) {
+        Map<String, List<String>> tmp = dynamicProgrammingSimExecutionMap.get(tree1.getLabel());
+        if (tmp == null) {
+            tmp = new HashMap<String, List<String>>();
+        }
+        tmp.put(tree2.getLabel(), dynamicProgrammingSimReasonerImpl.getExecutionTimes());
+        dynamicProgrammingSimExecutionMap.put(tree1.getLabel(), tmp);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,8 +136,8 @@ public class SimilarityService {
         BigDecimal result = computeSimilarity(topDownSimReasonerImpl, superRoleUnfolderManchesterSyntax, tree1, tree2);
 
         backTraceTable.inputConceptName(conceptName1, conceptName2);
-        backTraceTable.inputTreeNodeValue(tree1.getNodes().get(0), result, 1);
-        backTraceTable.inputTreeNodeValue(tree2.getNodes().get(0), result, 2);
+        backTraceTable.inputTreeNodeValue(tree1, result, 1);
+        backTraceTable.inputTreeNodeValue(tree2, result, 2);
 
         explanationService.explainSimilarity(backTraceTable);
 
