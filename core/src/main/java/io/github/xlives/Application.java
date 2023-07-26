@@ -136,7 +136,7 @@ public class Application implements CommandLineRunner {
 
         for (String line : lines) {
             String[] each = org.apache.commons.lang3.StringUtils.split(line, "\t");
-            BigDecimal degree = krssSimilarityController.measureSimilarityWithTopDownSimPi(each[0], each[1]);
+            BigDecimal degree = krssSimilarityController.measureSimilarity(each[0], each[1], TypeConstant.TOPDOWN_SIMPI, "KRSS");
             builder.append(each[0] + "\t" + each[1] +  "\t" + degree);
 
             List<String> benchmark = krssSimilarityController.getTopDownSimPiExecutionMap().get(each[0] + " tree").get(each[1] + " tree");

@@ -2,6 +2,7 @@ package io.githib.xlives.batch.krss.dynamicprogramming.simpi;
 
 import io.github.xlives.controller.KRSSSimilarityController;
 import io.github.xlives.controller.OWLSimilarityController;
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -99,7 +100,7 @@ public class BatchConfiguration {
                     dynamicProgrammingSimPiResult.append("\t");
                     dynamicProgrammingSimPiResult.append(concept2sToMeasure.get(i));
                     dynamicProgrammingSimPiResult.append("\t");
-                    dynamicProgrammingSimPiResult.append(krssSimilarityController.measureSimilarityWithDynamicProgrammingSimPi(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
+                    dynamicProgrammingSimPiResult.append(krssSimilarityController.measureSimilarity(concept1sToMeasure.get(i), concept2sToMeasure.get(i), TypeConstant.DYNAMIC_SIMPI, "KRSS"));
 
                     List<String> benchmark = krssSimilarityController.getDynamicProgrammingSimPiExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");
                     for (String result : benchmark) {

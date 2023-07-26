@@ -1,5 +1,6 @@
 package io.github.xlives.service;
 
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -142,25 +144,25 @@ public class SimilarityServiceTests {
     }
 
     @Test
-    public void testMeasureOWLConcetpsWithTopDownSim() {
-        BigDecimal value1 = similarityService.measureOWLConcetpsWithTopDownSim("Son", "SonInLaw");
+    public void testMeasureOWLConcetpsWithTopDownSim() throws IOException {
+        BigDecimal value1 = similarityService.measureConceptWithType("Son", "SonInLaw", TypeConstant.TOPDOWN_SIM, "OWL");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.97000");
 
-        BigDecimal value2 = similarityService.measureOWLConcetpsWithTopDownSim("Son", "Man");
+        BigDecimal value2 = similarityService.measureConceptWithType("Son", "Man", TypeConstant.TOPDOWN_SIM, "OWL");
         assertThat(value2.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.90000");
 
-        BigDecimal value3 = similarityService.measureOWLConcetpsWithTopDownSim("Female", "Person");
+        BigDecimal value3 = similarityService.measureConceptWithType("Female", "Person", TypeConstant.TOPDOWN_SIM, "OWL");
         assertThat(value3.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.00000");
     }
 
     @Test
-    public void testMeasureOWLConceptsWithTopDownSimPi() {
-        BigDecimal value1 = similarityService.measureOWLConceptsWithTopDownSimPi("SonInLaw", "Grandfather");
+    public void testMeasureOWLConceptsWithTopDownSimPi() throws IOException {
+        BigDecimal value1 = similarityService.measureConceptWithType("SonInLaw", "Grandfather", TypeConstant.TOPDOWN_SIMPI, "OWL");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 
     @Test
-    public void testMeasureOWLConceptsWithDynamicProgrammingSim() {
+    public void testMeasureOWLConceptsWithDynamicProgrammingSim() throws IOException {
         BigDecimal value1 = similarityService.measureOWLConceptsWithDynamicProgrammingSim("Son", "SonInLaw");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.97000");
 
@@ -172,13 +174,13 @@ public class SimilarityServiceTests {
     }
 
     @Test
-    public void testMeasureOWLConceptsWithDynamicProgrammingSimPi() {
+    public void testMeasureOWLConceptsWithDynamicProgrammingSimPi() throws IOException {
         BigDecimal value1 = similarityService.measureOWLConceptsWithDynamicProgrammingSimPi("SonInLaw", "Grandfather");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 
     @Test
-    public void testMeasureKRSSConcetpsWithTopDownSim() {
+    public void testMeasureKRSSConcetpsWithTopDownSim() throws IOException {
         BigDecimal value1 = similarityService.measureKRSSConcetpsWithTopDownSim("Son", "SonInLaw");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.97000");
 
@@ -190,13 +192,13 @@ public class SimilarityServiceTests {
     }
 
     @Test
-    public void testMeasureKRSSConceptsWithTopDownSimPi() {
+    public void testMeasureKRSSConceptsWithTopDownSimPi() throws IOException {
         BigDecimal value1 = similarityService.measureKRSSConceptsWithTopDownSimPi("SonInLaw", "Grandfather");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 
     @Test
-    public void testMeasureKRSSConceptsWithDynamicProgrammingSim() {
+    public void testMeasureKRSSConceptsWithDynamicProgrammingSim() throws IOException {
         BigDecimal value1 = similarityService.measureKRSSConceptsWithDynamicProgrammingSim("Son", "SonInLaw");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.97000");
 
@@ -208,8 +210,8 @@ public class SimilarityServiceTests {
     }
 
     @Test
-    public void testMeasureKRSSConceptsWithDynamicProgrammingSimPi() {
-        BigDecimal value1 = similarityService.measureKRSSConceptsWithDynamicProgrammingSimPi("SonInLaw", "Grandfather");
+    public void testMeasureKRSSConceptsWithDynamicProgrammingSimPi() throws IOException {
+        BigDecimal value1 = similarityService.measureConceptWithType("SonInLaw", "Grandfather", TypeConstant.DYNAMIC_SIMPI, "KRSS");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 }

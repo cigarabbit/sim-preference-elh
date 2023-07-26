@@ -1,5 +1,5 @@
 Concept 1	Concept 2		Similarity	Benchmark
-Female	Cousin	0.00000		14	0	4
+Female	Cousin	0.00000		8	0	2
 Female	ParentInLaw	0.00000		0	0	0
 Female	FemaleDescendant	0.80000		0	0	0
 Female	GreatGrandparent	0.00000		0	0	0
@@ -9,11 +9,11 @@ Female	Aunt	0.80000		0	0	0
 Female	Grandparent	0.00000		0	0	0
 Female	BloodRelation	0.00000		0	0	0
 Female	Man	0.58334		0	0	0
-Son	SonInLaw	0.97000		0	1	1
+Son	SonInLaw	0.97000		0	0	1
 Son	Sex	0.70000		0	0	0
 Son	Ancestor	0.35000		0	0	0
 Son	Cousin	0.60000		0	0	0
-Son	ParentInLaw	0.35000		0	0	0
+Son	ParentInLaw	0.35000		0	0	1
 Son	FemaleDescendant	0.77500		0	0	0
 Son	GreatGrandparent	0.35000		0	0	0
 Son	Grandmother	0.60000		0	0	0

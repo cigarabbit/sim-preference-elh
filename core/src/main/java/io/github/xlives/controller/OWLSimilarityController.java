@@ -50,7 +50,7 @@ public class OWLSimilarityController {
 
         validateInputs(conceptName1, conceptName2);
 
-        BigDecimal value = similarityService.measureWithType(conceptName1, conceptName2, type, conceptType);
+        BigDecimal value = similarityService.measureConceptWithType(conceptName1, conceptName2, type, conceptType);
 
         return value.setScale(5, BigDecimal.ROUND_HALF_UP);
     }

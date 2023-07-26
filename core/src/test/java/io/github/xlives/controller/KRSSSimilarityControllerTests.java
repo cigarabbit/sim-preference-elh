@@ -1,5 +1,6 @@
 package io.github.xlives.controller;
 
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -138,26 +140,26 @@ public class KRSSSimilarityControllerTests {
     }
 
     @Test
-    public void testMeasureSimilarityWithOWLSim() {
-        BigDecimal value1 = krssSimilarityController.measureSimilarityWithTopDownSim("Son", "SonInLaw");
+    public void testMeasureSimilarityWithOWLSim() throws IOException {
+        BigDecimal value1 = krssSimilarityController.measureSimilarity("Son", "SonInLaw", TypeConstant.TOPDOWN_SIM, "KRSS");
         assertThat(value1).isEqualTo(new BigDecimal("0.97000"));
     }
 
     @Test
-    public void testMeasureSimilarityWithOWLSimPi() {
-        BigDecimal value1 = krssSimilarityController.measureSimilarityWithTopDownSimPi("SonInLaw", "Grandfather");
+    public void testMeasureSimilarityWithOWLSimPi() throws IOException {
+        BigDecimal value1 = krssSimilarityController.measureSimilarity("SonInLaw", "Grandfather", TypeConstant.TOPDOWN_SIMPI, "KRSS");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 
     @Test
-    public void testMeasureSimilarityWithDynamicProgrammingSim() {
-        BigDecimal value1 = krssSimilarityController.measureSimilarityWithDynamicProgrammingSim("Son", "SonInLaw");
+    public void testMeasureSimilarityWithDynamicProgrammingSim() throws IOException {
+        BigDecimal value1 = krssSimilarityController.measureSimilarity("Son", "SonInLaw", TypeConstant.DYNAMIC_SIM, "KRSS");
         assertThat(value1).isEqualTo(new BigDecimal("0.97000"));
     }
 
     @Test
-    public void testMeasureSimilarityWithDynamicProgrammingSimPi() {
-        BigDecimal value1 = krssSimilarityController.measureSimilarityWithDynamicProgrammingSimPi("SonInLaw", "Grandfather");
+    public void testMeasureSimilarityWithDynamicProgrammingSimPi() throws IOException {
+        BigDecimal value1 = krssSimilarityController.measureSimilarity("SonInLaw", "Grandfather", TypeConstant.DYNAMIC_SIMPI, "KRSS");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 }

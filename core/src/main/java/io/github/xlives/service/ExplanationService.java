@@ -87,6 +87,10 @@ public class ExplanationService {
 
         Set<String> matching = findMatchingWords(priList);
 
+        if (matching.size() == 0) {
+            matching.add("nothing");
+        }
+
         explanation.append("The similarity between ").append(conceptName1).append(" and ").append(conceptName2)
                 .append(" is ").append(degree.setScale(5, BigDecimal.ROUND_HALF_UP));
         explanation.append(" because they have ").append(matching).append(" in common.");
