@@ -35,10 +35,11 @@ public class ExplanationService {
 
         List<String[]> priList = new ArrayList<>();
 
-        int count = 0;
-
         // iterate through each value in backTraceTable
+        Deque<Map.Entry<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>>> lastTwoEntries = new LinkedList<>();
+
         for (Map.Entry<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>> backtrace : backTraceTable.getBackTraceTable().entrySet()) {
+
             Map<Integer, String[]> keyMap = backtrace.getKey();
 
             for (int i = 0; i < keyMap.size(); i++) {
@@ -54,11 +55,26 @@ public class ExplanationService {
                 }
             }
 
-            // retrieve primitives, existential, and degree
-            for (Map.Entry<String, Map<Tree<Set<String>>, BigDecimal>> entry : backtrace.getValue().entrySet()) {
+            lastTwoEntries.add(backtrace);
+            if (lastTwoEntries.size() > 2) {
+                lastTwoEntries.removeFirst(); // keep only the last two
+            }
+        }
+
+        for (Map.Entry<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>> backtrace : lastTwoEntries) {
+
+            Map<String, Map<Tree<Set<String>>, BigDecimal>> valueMap = backtrace.getValue();
+
+            // retrieve primitives and degree along with its concept name
+            for (Map.Entry<String, Map<Tree<Set<String>>, BigDecimal>> entry : valueMap.entrySet()) {
+                String[] priArr = new String[1];
+
                 String key = entry.getKey();
                 String exi = "";
-                for (Map.Entry<Tree<Set<String>>, BigDecimal> child : entry.getValue().entrySet()){
+
+                for (Map.Entry<Tree<Set<String>>, BigDecimal> child : entry.getValue().entrySet()) {
+
+                    // existential
                     for (Map.Entry<Integer, TreeNode<Set<String>>> tree : child.getKey().getNodes().entrySet()) {
                         exi = tree.getValue().getEdgeToParent();
 
@@ -66,23 +82,18 @@ public class ExplanationService {
                             exi = "** DO NOT HAVE ANY ROLES **";
                         }
                     }
-                    if ( count < 2) {
-                        degree = child.getValue();
 
-                        // sets of common primitives
-                        String[] priArr = new String[]{child.getKey().getNodes().get(0).toString()};
-                        removeUnwantedChar(priArr);
-                        priList.add(priArr);
+                    degree = child.getValue();
 
-                        res.append("\t").append(key).append(" = ").append(Arrays.toString(priArr))
-                                .append(", ").append(exi)
-                                .append("\n");
-                    }
-                    count++;
-
+                    priArr[0] = child.getKey().getNodes().get(0).toString();
+                    removeUnwantedChar(priArr);
+                    priList.add(priArr);
                 }
-            }
 
+                res.append("\t").append(key).append(" = ").append(Arrays.toString(priArr))
+                        .append(", ").append(exi)
+                        .append("\n");
+            }
         }
 
         Set<String> matching = findMatchingWords(priList);

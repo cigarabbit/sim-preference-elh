@@ -1,4 +1,5 @@
-Mother	Son	0.60000	13
+Mother	Son	0.60000	11
 Daughter	Parent	0.35000	0
-Son	Father	0.80000	0
+Son	Father	0.80000	1
 Son	Daughter	0.80000	0
+Mother	Parent	0.35000	0

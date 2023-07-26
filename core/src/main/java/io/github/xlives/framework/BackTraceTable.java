@@ -5,13 +5,14 @@ import io.github.xlives.framework.descriptiontree.Tree;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class BackTraceTable {
     private static Integer index = 0;
 
-    private Map<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>> backTraceTable = new HashMap<>();
+    private Map<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>> backTraceTable = new LinkedHashMap<>();
 
     public StringBuilder test = new StringBuilder();
 
