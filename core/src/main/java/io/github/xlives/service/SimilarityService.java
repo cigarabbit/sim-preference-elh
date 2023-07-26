@@ -1,5 +1,6 @@
 package io.github.xlives.service;
 
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.exception.ErrorCode;
 import io.github.xlives.exception.JSimPiException;
 import io.github.xlives.framework.BackTraceTable;
@@ -228,6 +229,53 @@ public class SimilarityService {
         Tree<Set<String>> tree2 = unfoldAndConstructTree(conceptDefinitionUnfolderKRSSSyntax, conceptName2);
 
         return computeSimilarity(dynamicProgrammingSimPiReasonerImpl, superRoleUnfolderKRSSSyntax, tree1, tree2);
+    }
+
+
+    public BigDecimal measureWithType(String conceptName1, String conceptName2, TypeConstant type, String conceptType) throws IOException {
+        IConceptUnfolder conceptT = null;
+
+        IRoleUnfolder roleUnfolderT = null;
+
+        IReasoner reasonerT = null;
+
+        String measurementType = type.getDescription();
+
+        if (conceptName1 == null || conceptName2 == null) {
+            throw new JSimPiException("Unable measure with " + measurementType + " as conceptName1[" + conceptName1 + "] and " +
+                    "conceptName2[" + conceptName2 + "] are null.", ErrorCode.OWLSimService_IllegalArguments);
+        }
+
+        if (conceptType.equals("KRSS")) {
+            conceptT = conceptDefinitionUnfolderKRSSSyntax;
+            roleUnfolderT = superRoleUnfolderKRSSSyntax;
+        } else if (conceptType.equals("OWL")) {
+            conceptT = conceptDefinitionUnfolderManchesterSyntax;
+            roleUnfolderT = superRoleUnfolderManchesterSyntax;
+        }
+
+        if (measurementType.equals("dynamic programming Sim")) {
+            reasonerT = dynamicProgrammingSimReasonerImpl;
+        } else if (measurementType.equals("dynamic programming SimPi")) {
+            reasonerT = dynamicProgrammingSimPiReasonerImpl;
+        } else if (measurementType.equals("top down Sim")) {
+            reasonerT = topDownSimReasonerImpl;
+        } else {
+            reasonerT = topDownSimPiReasonerImpl;
+        }
+
+        Tree<Set<String>> tree1 = unfoldAndConstructTree(conceptT, conceptName1);
+        Tree<Set<String>> tree2 = unfoldAndConstructTree(conceptT, conceptName2);
+
+        BigDecimal result = computeSimilarity(reasonerT, roleUnfolderT, tree1, tree2);
+        // extract explanation
+        backTraceTable.inputConceptName(conceptName1, conceptName2);
+        backTraceTable.inputTreeNodeValue(tree1, result, 1);
+        backTraceTable.inputTreeNodeValue(tree2, result, 2);
+
+        explanationService.explainSimilarity(backTraceTable);
+
+        return result;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

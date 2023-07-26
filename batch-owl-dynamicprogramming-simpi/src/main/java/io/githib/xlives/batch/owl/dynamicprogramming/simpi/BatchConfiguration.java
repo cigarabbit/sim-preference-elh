@@ -2,6 +2,7 @@ package io.githib.xlives.batch.owl.dynamicprogramming.simpi;
 
 import io.github.xlives.controller.KRSSSimilarityController;
 import io.github.xlives.controller.OWLSimilarityController;
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -96,7 +97,7 @@ public class BatchConfiguration {
                 for (int i = 0; i < concept1sToMeasure.size(); i++) { // ignore length of concept 2
                     dynamicProgrammingSimPiResult.append(concept1sToMeasure.get(i)).append("\t\t\t");
                     dynamicProgrammingSimPiResult.append(concept2sToMeasure.get(i)).append("\t\t");
-                    dynamicProgrammingSimPiResult.append(owlSimilarityController.measureSimilarityWithDynamicProgrammingSimPi(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
+                    dynamicProgrammingSimPiResult.append(owlSimilarityController.measureSimilarity(concept1sToMeasure.get(i), concept2sToMeasure.get(i), TypeConstant.DYNAMIC_SIMPI, "OWL"));
                     dynamicProgrammingSimPiResult.append("\t");
 
                     List<String> benchmark = owlSimilarityController.getDynamicProgrammingSimPiExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");

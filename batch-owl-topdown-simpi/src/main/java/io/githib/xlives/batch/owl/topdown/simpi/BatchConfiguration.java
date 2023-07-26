@@ -2,6 +2,7 @@ package io.githib.xlives.batch.owl.topdown.simpi;
 
 import io.github.xlives.controller.KRSSSimilarityController;
 import io.github.xlives.controller.OWLSimilarityController;
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -52,16 +53,16 @@ import java.util.Map;
 @SpringBootApplication
 public class BatchConfiguration {
 
-    private static final File INPUT_CONCEPTS = new File("./input/input");
-    private static final File INPUT_PRIMITIVE_CONCEPT_IMPORTANCE = new File("./input/preference-profile/primitive-concept-importance");
-    private static final File INPUT_ROLE_IMPORTANCE = new File("./input/preference-profile/role-importance");
-    private static final File INPUT_PRIMITIVE_CONCEPTS_SIMILARITY = new File("./input/preference-profile/primitive-concepts-similarity");
-    private static final File INPUT_PRIMITIVE_ROLES_SIMILARITY = new File("./input/preference-profile/primitive-roles-similarity");
-    private static final File INPUT_ROLE_DISCOUNT_FACTOR = new File("./input/preference-profile/role-discount-factor");
+    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/input");
+    private static final File INPUT_PRIMITIVE_CONCEPT_IMPORTANCE = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/preference-profile/primitive-concept-importance");
+    private static final File INPUT_ROLE_IMPORTANCE = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/preference-profile/role-importance");
+    private static final File INPUT_PRIMITIVE_CONCEPTS_SIMILARITY = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/preference-profile/primitive-concepts-similarity");
+    private static final File INPUT_PRIMITIVE_ROLES_SIMILARITY = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/preference-profile/primitive-roles-similarity");
+    private static final File INPUT_ROLE_DISCOUNT_FACTOR = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/preference-profile/role-discount-factor");
 
-    private static final File OUTPUT_TOPDOWN_SIMPI = new File("./output/output");
+    private static final File OUTPUT_TOPDOWN_SIMPI = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/output/output");
 
-    private static final String PATH_OWL_ONTOLOGY = "./input/family.owl";
+    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-simpi/input/family.owl";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -96,7 +97,7 @@ public class BatchConfiguration {
                     topDownSimPiResult.append("\t");
                     topDownSimPiResult.append(concept2sToMeasure.get(i));
                     topDownSimPiResult.append("\t");
-                    topDownSimPiResult.append(owlSimilarityController.measureSimilarityWithTopDownSimPi(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
+                    topDownSimPiResult.append(owlSimilarityController.measureSimilarity(concept1sToMeasure.get(i), concept2sToMeasure.get(i), TypeConstant.TOPDOWN_SIMPI, "OWL"));
 
                     List<String> benchmark = owlSimilarityController.getTopDownSimPiExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");
                     for (String result : benchmark) {

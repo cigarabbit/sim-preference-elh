@@ -1,5 +1,6 @@
 package io.github.xlives.controller;
 
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -88,29 +90,29 @@ public class OWLSimilarityControllerTests {
     }
 
     @Test
-    public void testMeasureSimilarityWithOWLSim() {
-        BigDecimal value1 = owlSimilarityController.measureSimilarityWithTopDownSim("Son", "SonInLaw");
+    public void testMeasureSimilarityWithOWLSim() throws IOException {
+        BigDecimal value1 = owlSimilarityController.measureSimilarity("Son", "SonInLaw", TypeConstant.TOPDOWN_SIM, "OWL");
         assertThat(value1).isEqualTo(new BigDecimal("0.97000"));
 
-        BigDecimal value2 = owlSimilarityController.measureSimilarityWithTopDownSim("Son", "owl:Thing");
+        BigDecimal value2 = owlSimilarityController.measureSimilarity("Son", "owl:Thing", TypeConstant.TOPDOWN_SIM, "OWL");
         assertThat(value2).isEqualTo(new BigDecimal("0.50000"));
     }
 
     @Test
-    public void testMeasureSimilarityWithOWLSimPi() {
-        BigDecimal value1 = owlSimilarityController.measureSimilarityWithTopDownSimPi("SonInLaw", "Grandfather");
+    public void testMeasureSimilarityWithOWLSimPi() throws IOException {
+        BigDecimal value1 = owlSimilarityController.measureSimilarity("SonInLaw", "Grandfather", TypeConstant.TOPDOWN_SIMPI, "OWL");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 
     @Test
-    public void testMeasureSimilarityWithDynamicProgrammingSim() {
-        BigDecimal value1 = owlSimilarityController.measureSimilarityWithDynamicProgrammingSim("Son", "SonInLaw");
+    public void testMeasureSimilarityWithDynamicProgrammingSim() throws IOException {
+        BigDecimal value1 = owlSimilarityController.measureSimilarity("Son", "SonInLaw", TypeConstant.DYNAMIC_SIM, "OWL");
         assertThat(value1).isEqualTo(new BigDecimal("0.97000"));
     }
 
     @Test
-    public void testMeasureSimilarityWithDynamicProgrammingSimPi() {
-        BigDecimal value1 = owlSimilarityController.measureSimilarityWithDynamicProgrammingSimPi("SonInLaw", "Grandfather");
+    public void testMeasureSimilarityWithDynamicProgrammingSimPi() throws IOException {
+        BigDecimal value1 = owlSimilarityController.measureSimilarity("SonInLaw", "Grandfather", TypeConstant.DYNAMIC_SIMPI, "OWL");
         assertThat(value1.setScale(5, BigDecimal.ROUND_HALF_UP).toPlainString()).isEqualTo("0.84995");
     }
 }

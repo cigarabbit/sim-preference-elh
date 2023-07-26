@@ -1,5 +1,6 @@
 package io.github.xlives.controller;
 
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.exception.ErrorCode;
 import io.github.xlives.exception.JSimPiException;
 import io.github.xlives.service.SimilarityService;
@@ -40,58 +41,16 @@ public class OWLSimilarityController {
     // Public //////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public BigDecimal measureSimilarityWithTopDownSim(String conceptName1, String conceptName2) throws IOException {
+    public BigDecimal measureSimilarity(String conceptName1, String conceptName2, TypeConstant type, String conceptType) throws IOException {
         if(conceptName1 == null || conceptName2 == null) {
-            throw new JSimPiException("Unable to measure similarity with top down Sim as conceptName1[" + conceptName1
+            throw new JSimPiException("Unable to measure similarity with " + type.getDescription() + " as conceptName1[" + conceptName1
                     + "] and conceptName2[" + conceptName2 + "] are null.",
                     ErrorCode.OwlSimilarityController_IllegalArguments);
         }
 
         validateInputs(conceptName1, conceptName2);
 
-        BigDecimal value = similarityService.measureOWLConcetpsWithTopDownSim(conceptName1, conceptName2);
-
-        return value.setScale(5, BigDecimal.ROUND_HALF_UP);
-    }
-
-    public BigDecimal measureSimilarityWithTopDownSimPi(String conceptName1, String conceptName2) throws IOException {
-        if(conceptName1 == null || conceptName2 == null) {
-            throw new JSimPiException("Unable to measure similarity with top down SimPi as conceptName1[" + conceptName1
-                    + "] and conceptName2[" + conceptName2 + "] are null.",
-                    ErrorCode.OwlSimilarityController_IllegalArguments);
-        }
-
-        validateInputs(conceptName1, conceptName2);
-
-        BigDecimal value = similarityService.measureOWLConceptsWithTopDownSimPi(conceptName1, conceptName2);
-
-        return value.setScale(5, BigDecimal.ROUND_HALF_UP);
-    }
-
-    public BigDecimal measureSimilarityWithDynamicProgrammingSim(String conceptName1, String conceptName2) throws IOException {
-        if(conceptName1 == null || conceptName2 == null) {
-            throw new JSimPiException("Unable to measure similarity with top down Sim as conceptName1[" + conceptName1
-                    + "] and conceptName2[" + conceptName2 + "] are null.",
-                    ErrorCode.OwlSimilarityController_IllegalArguments);
-        }
-
-        validateInputs(conceptName1, conceptName2);
-
-        BigDecimal value = similarityService.measureOWLConceptsWithDynamicProgrammingSim(conceptName1, conceptName2);
-
-        return value.setScale(5, BigDecimal.ROUND_HALF_UP);
-    }
-
-    public BigDecimal measureSimilarityWithDynamicProgrammingSimPi(String conceptName1, String conceptName2) throws IOException {
-        if (conceptName1 == null || conceptName2 == null) {
-            throw new JSimPiException("Unable to measure similarity with top down SimPi as conceptName1[" + conceptName1
-                    + "] and conceptName2[" + conceptName2 + "] are null.",
-                    ErrorCode.OwlSimilarityController_IllegalArguments);
-        }
-
-        validateInputs(conceptName1, conceptName2);
-
-        BigDecimal value = similarityService.measureOWLConceptsWithDynamicProgrammingSimPi(conceptName1, conceptName2);
+        BigDecimal value = similarityService.measureWithType(conceptName1, conceptName2, type, conceptType);
 
         return value.setScale(5, BigDecimal.ROUND_HALF_UP);
     }

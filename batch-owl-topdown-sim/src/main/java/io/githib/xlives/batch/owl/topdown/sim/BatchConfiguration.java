@@ -2,6 +2,7 @@ package io.githib.xlives.batch.owl.topdown.sim;
 
 import io.github.xlives.controller.KRSSSimilarityController;
 import io.github.xlives.controller.OWLSimilarityController;
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
 import io.github.xlives.framework.OWLServiceContext;
 import io.github.xlives.framework.PreferenceProfile;
@@ -88,7 +89,7 @@ public class BatchConfiguration {
                     topDownSimResult.append("\t");
                     topDownSimResult.append(concept2sToMeasure.get(i));
                     topDownSimResult.append("\t");
-                    topDownSimResult.append(owlSimilarityController.measureSimilarityWithTopDownSim(concept1sToMeasure.get(i), concept2sToMeasure.get(i)));
+                    topDownSimResult.append(owlSimilarityController.measureSimilarity(concept1sToMeasure.get(i), concept2sToMeasure.get(i), TypeConstant.TOPDOWN_SIM, "OWL"));
 
                     List<String> benchmark = owlSimilarityController.getTopDownSimExecutionMap().get(concept1sToMeasure.get(i) + " tree").get(concept2sToMeasure.get(i) + " tree");
                     for (String result : benchmark) {

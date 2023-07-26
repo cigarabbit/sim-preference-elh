@@ -2,6 +2,7 @@ package io.github.xlives;
 
 import io.github.xlives.controller.KRSSSimilarityController;
 import io.github.xlives.controller.OWLSimilarityController;
+import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.exception.ErrorCode;
 import io.github.xlives.exception.JSimPiException;
 import io.github.xlives.framework.KRSSServiceContext;
@@ -279,7 +280,7 @@ public class Application implements CommandLineRunner {
 
             owlServiceContext.init(owlFilepath);
 
-            BigDecimal value = owlSimilarityController.measureSimilarityWithDynamicProgrammingSim(conceptName1, conceptName2);
+            BigDecimal value = owlSimilarityController.measureSimilarity(conceptName1, conceptName2, TypeConstant.DYNAMIC_SIM, "OWL");
 
             if (logger.isInfoEnabled()) {
                 logger.info("Done! The similarity between " + conceptName1 + " and " + conceptName2 + " is " + value.toPlainString() + " %.");
