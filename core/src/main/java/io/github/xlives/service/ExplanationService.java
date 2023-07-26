@@ -16,8 +16,8 @@ public class ExplanationService {
 
     private static StringBuilder explanation = new StringBuilder();
 
-    private File output_file = new File("/Users/rchn/Desktop/simservice");
-    public File backtrace_file = new File("/Users/rchn/Desktop/backtracetable");
+    private File output_file = new File("./explanation/explanation");
+    public File backtrace_file = new File("./explanation/backtracetable");
 
     public void explainSimilarity(BackTraceTable backTraceTable) throws IOException {
 
