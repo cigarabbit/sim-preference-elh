@@ -1,6 +1,5 @@
 package io.github.xlives.batch.owl.dynamicprogramming.sim;
 
-import io.github.xlives.controller.KRSSSimilarityController;
 import io.github.xlives.controller.OWLSimilarityController;
 import io.github.xlives.enumeration.TypeConstant;
 import io.github.xlives.framework.KRSSServiceContext;
@@ -36,9 +35,7 @@ import org.springframework.context.annotation.Import;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Import(value= {OWLSimilarityController.class, ValidationService.class,
         TopDownSimReasonerImpl.class, TopDownSimPiReasonerImpl.class,
