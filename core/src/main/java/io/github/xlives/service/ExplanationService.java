@@ -34,6 +34,7 @@ public class ExplanationService {
         StringBuilder res = new StringBuilder();
 
         List<String[]> priList = new ArrayList<>();
+        List<List<String>> exiList = new ArrayList<>();
 
         // iterate through each value in backTraceTable
         Deque<Map.Entry<Map<Integer, String[]>, Map<String, Map<Tree<Set<String>>, BigDecimal>>>> lastTwoEntries = new LinkedList<>();
@@ -68,9 +69,10 @@ public class ExplanationService {
             // retrieve primitives and degree along with its concept name
             for (Map.Entry<String, Map<Tree<Set<String>>, BigDecimal>> entry : valueMap.entrySet()) {
                 String[] priArr = new String[1];
+                List<String> exiEach = new ArrayList<>();
 
                 String key = entry.getKey();
-                String exi = "";
+                String exi;
 
                 for (Map.Entry<Tree<Set<String>>, BigDecimal> child : entry.getValue().entrySet()) {
 
@@ -78,8 +80,8 @@ public class ExplanationService {
                     for (Map.Entry<Integer, TreeNode<Set<String>>> tree : child.getKey().getNodes().entrySet()) {
                         exi = tree.getValue().getEdgeToParent();
 
-                        if (exi == null) {
-                            exi = "** DO NOT HAVE ANY ROLES **";
+                        if (exi != null) {
+                            exiEach.add(exi);
                         }
                     }
 
@@ -88,23 +90,35 @@ public class ExplanationService {
                     priArr[0] = child.getKey().getNodes().get(0).toString();
                     removeUnwantedChar(priArr);
                     priList.add(priArr);
+                    exiList.add(exiEach);
                 }
 
-                res.append("\t").append(key).append(" = ").append(Arrays.toString(priArr))
-                        .append(", ").append(exi)
-                        .append("\n");
+                res.append("\t").append(key).append(" = ").append(Arrays.toString(priArr));
+
+                if(!exiEach.isEmpty()) {
+                    res.append(", ").append(exiEach);
+                }
+
+                res.append("\n");
             }
         }
 
-        Set<String> matching = findMatchingWords(priList);
+        // explanation details
+        Set<String> matchingCon = findMatchingConcept(priList);
+        Set<String> matchingRole = findMatchingRole(exiList);
 
-        if (matching.size() == 0) {
-            matching.add("nothing");
+        if (matchingCon.size() == 0) {
+            matchingCon.add("nothing");
         }
 
         explanation.append("The similarity between ").append(conceptName1).append(" and ").append(conceptName2)
                 .append(" is ").append(degree.setScale(5, BigDecimal.ROUND_HALF_UP));
-        explanation.append(" because they have ").append(matching).append(" in common.");
+        explanation.append(" because they have ").append(matchingCon).append(" in common.");
+
+        if (!matchingRole.isEmpty()) {
+            explanation.append(" Moreover, both of them also ").append(matchingRole).append(".");
+        }
+
         explanation.append("\n").append(res);
 
         FileUtils.writeStringToFile(backtrace_file, backTraceTable.getBackTraceTable().toString(), true);
@@ -117,7 +131,7 @@ public class ExplanationService {
         }
     }
 
-    private static Set<String> findMatchingWords(List<String[]> wordsList) {
+    private static Set<String> findMatchingConcept(List<String[]> wordsList) {
         Set<String> matchingWords = new HashSet<>();
 
         if (!wordsList.isEmpty()) {
@@ -147,4 +161,22 @@ public class ExplanationService {
         return matchingWords;
     }
 
+    public Set<String> findMatchingRole(List<List<String>> listOfLists) {
+        Set<String> matchingStrings = new HashSet<>();
+
+        List<String> firstSet = listOfLists.get(0);
+        List<String> secondSet = listOfLists.get(1);
+
+        if (!firstSet.isEmpty()) {
+            for (String list : firstSet) {
+                for (String str : secondSet) {
+                    if (str.equals(list) && !str.equals("** DO NOT HAVE ANY ROLES **")) {
+                        matchingStrings.add(str);
+                    }
+                }
+            }
+        }
+
+        return matchingStrings;
+    }
 }

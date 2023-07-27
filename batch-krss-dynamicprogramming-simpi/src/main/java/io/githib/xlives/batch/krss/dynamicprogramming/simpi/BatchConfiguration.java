@@ -55,16 +55,16 @@ public class BatchConfiguration {
 
     private static final String HEADER_RESULT = "concept" + "\t" + "concept" + "\t" + "similarity" + "\t" + "millisecond" + "\t" + "millisecond" + "\t" + "millisecond";
 
-    private static final File INPUT_CONCEPTS = new File("./input/input");
-    private static final File INPUT_PRIMITIVE_CONCEPT_IMPORTANCE = new File("./input/preference-profile/primitive-concept-importance");
-    private static final File INPUT_ROLE_IMPORTANCE = new File("./input/preference-profile/role-importance");
-    private static final File INPUT_PRIMITIVE_CONCEPTS_SIMILARITY = new File("./input/preference-profile/primitive-concepts-similarity");
-    private static final File INPUT_PRIMITIVE_ROLES_SIMILARITY = new File("./input/preference-profile/primitive-roles-similarity");
-    private static final File INPUT_ROLE_DISCOUNT_FACTOR = new File("./input/preference-profile/role-discount-factor");
+    private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/input");
+    private static final File INPUT_PRIMITIVE_CONCEPT_IMPORTANCE = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/preference-profile/primitive-concept-importance");
+    private static final File INPUT_ROLE_IMPORTANCE = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/preference-profile/role-importance");
+    private static final File INPUT_PRIMITIVE_CONCEPTS_SIMILARITY = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/preference-profile/primitive-concepts-similarity");
+    private static final File INPUT_PRIMITIVE_ROLES_SIMILARITY = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/preference-profile/primitive-roles-similarity");
+    private static final File INPUT_ROLE_DISCOUNT_FACTOR = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/preference-profile/role-discount-factor");
 
-    private static final File OUTPUT_DYNAMICPROGRAMMING_SIMPI = new File("./output/output");
+    private static final File OUTPUT_DYNAMICPROGRAMMING_SIMPI = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/output/output");
 
-    private static final String PATH_KRSS_ONTOLOGY = "./input/snomed.krss";
+    private static final String PATH_KRSS_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-simpi/input/snomed.krss";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

@@ -127,9 +127,9 @@ public class Application implements CommandLineRunner {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void run3(String... args) throws IOException {
-        krssServiceContext.init("/Users/Xlives/HgProjects/jSimPi/core/snomed.krss");
+        krssServiceContext.init("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-krss-dynamicprogramming-sim/input/snomed.krss");
 
-        List<String> lines = readSctDescriptionFile("/Users/Xlives/Desktop/Sampled/defined_finding_finding.txt");
+        List<String> lines = readSctDescriptionFile("/Users/rchn/Desktop/refactor/sim-preference-elh/core/defined_finding.txt");
 
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER_RESULT_FOR_TD + "\n");
@@ -150,7 +150,7 @@ public class Application implements CommandLineRunner {
         }
 
         try {
-            FileUtils.writeStringToFile(new File("/Users/Xlives/Desktop/table6/td-sim-pi-0/defined_finding_finding/output-13.txt"), builder.toString());
+            FileUtils.writeStringToFile(new File("/Users/rchn/Desktop/refactor/sim-preference-elh/core/defined_finding_finding/output-13.txt"), builder.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
