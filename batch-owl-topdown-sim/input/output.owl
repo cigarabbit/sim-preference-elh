@@ -18,16 +18,19 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+
     
 
 
     <!-- http://example.org/voc/DOCTORS#ref-PATIENT_ID -->
+
 
     <owl:ObjectProperty rdf:about="http://example.org/voc/DOCTORS#ref-PATIENT_ID"/>
     
 
 
     <!-- http://example.org/voc/DOCTOR_INFO#ref-PATIENT_RECORD_ID -->
+
 
     <owl:ObjectProperty rdf:about="http://example.org/voc/DOCTOR_INFO#ref-PATIENT_RECORD_ID"/>
     
@@ -41,10 +44,12 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+
     
 
 
     <!-- http://example.org/voc/DOCTORS#DOCTOR_ID -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTORS#DOCTOR_ID"/>
     
@@ -52,11 +57,13 @@
 
     <!-- http://example.org/voc/DOCTORS#DOCTOR_NAME -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTORS#DOCTOR_NAME"/>
     
 
 
     <!-- http://example.org/voc/DOCTORS#PATIENT_ID -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTORS#PATIENT_ID"/>
     
@@ -64,11 +71,13 @@
 
     <!-- http://example.org/voc/DOCTORS#SPECIALIZATION -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTORS#SPECIALIZATION"/>
     
 
 
     <!-- http://example.org/voc/DOCTOR_INFO#DOCTOR_FULL_NAME -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTOR_INFO#DOCTOR_FULL_NAME"/>
     
@@ -76,11 +85,13 @@
 
     <!-- http://example.org/voc/DOCTOR_INFO#DOCTOR_INFO_ID -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTOR_INFO#DOCTOR_INFO_ID"/>
     
 
 
     <!-- http://example.org/voc/DOCTOR_INFO#PATIENT_RECORD_ID -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTOR_INFO#PATIENT_RECORD_ID"/>
     
@@ -88,11 +99,13 @@
 
     <!-- http://example.org/voc/DOCTOR_INFO#SPECIALTY -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/DOCTOR_INFO#SPECIALTY"/>
     
 
 
     <!-- http://example.org/voc/PATIENTS#PATIENT_AGE -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENTS#PATIENT_AGE"/>
     
@@ -100,11 +113,13 @@
 
     <!-- http://example.org/voc/PATIENTS#PATIENT_GENDER -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENTS#PATIENT_GENDER"/>
     
 
 
     <!-- http://example.org/voc/PATIENTS#PATIENT_ID -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENTS#PATIENT_ID"/>
     
@@ -112,11 +127,13 @@
 
     <!-- http://example.org/voc/PATIENTS#PATIENT_NAME -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENTS#PATIENT_NAME"/>
     
 
 
     <!-- http://example.org/voc/PATIENT_RECORDS#AGE_YEARS -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENT_RECORDS#AGE_YEARS"/>
     
@@ -124,17 +141,20 @@
 
     <!-- http://example.org/voc/PATIENT_RECORDS#FULL_NAME -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENT_RECORDS#FULL_NAME"/>
     
 
 
     <!-- http://example.org/voc/PATIENT_RECORDS#GENDER -->
 
+
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENT_RECORDS#GENDER"/>
     
 
 
     <!-- http://example.org/voc/PATIENT_RECORDS#PATIENT_RECORD_ID -->
+
 
     <owl:DatatypeProperty rdf:about="http://example.org/voc/PATIENT_RECORDS#PATIENT_RECORD_ID"/>
     
@@ -148,69 +168,39 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+
     
 
 
-    <!-- http://example.org/voc#DOCTORS -->
+    <!-- http://example.org/voc/DOCTORS -->
 
-    <owl:Class rdf:about="http://example.org/voc#DOCTORS">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://example.org/voc#DOCTOR_ID"/>
-                    <rdf:Description rdf:about="http://example.org/voc#DOCTOR_INFO"/>
-                    <rdf:Description rdf:about="http://example.org/voc#DOCTOR_NAME"/>
-                    <rdf:Description rdf:about="http://example.org/voc#PATIENT_ID"/>
-                    <rdf:Description rdf:about="http://example.org/voc#SPECIALIZATION"/>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
+
+    <owl:Class rdf:about="http://example.org/voc/DOCTORS"/>
     
 
 
-    <!-- http://example.org/voc#DOCTOR_ID -->
+    <!-- http://example.org/voc/DOCTOR_INFO -->
 
-    <owl:Class rdf:about="http://example.org/voc#DOCTOR_ID"/>
+
+    <owl:Class rdf:about="http://example.org/voc/DOCTOR_INFO"/>
     
 
 
-    <!-- http://example.org/voc#DOCTOR_INFO -->
+    <!-- http://example.org/voc/PATIENTS -->
 
-    <owl:Class rdf:about="http://example.org/voc#DOCTOR_INFO"/>
+
+    <owl:Class rdf:about="http://example.org/voc/PATIENTS"/>
     
 
 
-    <!-- http://example.org/voc#DOCTOR_NAME -->
-
-    <owl:Class rdf:about="http://example.org/voc#DOCTOR_NAME"/>
-    
+    <!-- http://example.org/voc/PATIENT_RECORDS -->
 
 
-    <!-- http://example.org/voc#PATIENTS -->
-
-    <owl:Class rdf:about="http://example.org/voc#PATIENTS"/>
-    
-
-
-    <!-- http://example.org/voc#PATIENT_ID -->
-
-    <owl:Class rdf:about="http://example.org/voc#PATIENT_ID"/>
-    
-
-
-    <!-- http://example.org/voc#PATIENT_RECORDS -->
-
-    <owl:Class rdf:about="http://example.org/voc#PATIENT_RECORDS"/>
-    
-
-
-    <!-- http://example.org/voc#SPECIALIZATION -->
-
-    <owl:Class rdf:about="http://example.org/voc#SPECIALIZATION"/>
+    <owl:Class rdf:about="http://example.org/voc/PATIENT_RECORDS"/>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 5.1.20) https://github.com/owlcs/owlapi/ -->
+
 

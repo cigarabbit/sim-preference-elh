@@ -23,7 +23,6 @@ public class BackTraceTable {
 
         treeNodeMap.put(node, values);
 
-        // map tree 1 with concept name 1
         if (order == 1){
             innerMap.put(cnPair[0], treeNodeMap);
         } else {

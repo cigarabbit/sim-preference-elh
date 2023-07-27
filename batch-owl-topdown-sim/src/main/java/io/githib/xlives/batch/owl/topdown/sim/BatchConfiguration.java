@@ -56,7 +56,7 @@ public class BatchConfiguration {
     private static final File INPUT_CONCEPTS = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/input");
     private static final File OUTPUT_TOPDOWN_SIM = new File("/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/output/output");
 
-    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/output.owl";
+    private static final String PATH_OWL_ONTOLOGY = "/Users/rchn/Desktop/refactor/sim-preference-elh/batch-owl-topdown-sim/input/family.owl";
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
